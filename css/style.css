@@ -399,3 +399,28 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.avatar-stack {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-stack .avatar-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: -10px;
+}
+
+.avatar-stack .avatar-item:first-child {
+    margin-left: 0;
+}
+
+@media (max-width: 576px) {
+    .avatar-stack .avatar-item {
+        width: 24px;
+        height: 24px;
+        margin-left: -8px;
+    }
+}
