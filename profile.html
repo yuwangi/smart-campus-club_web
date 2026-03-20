@@ -179,6 +179,10 @@
             if (document.getElementById('username') && document.getElementById('username').tagName === 'INPUT') {
                 document.getElementById('username').value = username;
             }
+            const savedHobbies = localStorage.getItem('userHobbies');
+            if (savedHobbies && document.getElementById('hobbies')) {
+                document.getElementById('hobbies').value = savedHobbies;
+            }
         });
 
         function handleLogout(e) {
@@ -213,6 +217,8 @@
 
         function handleSave(event) {
             event.preventDefault();
+            const hobbies = document.getElementById('hobbies').value;
+            localStorage.setItem('userHobbies', hobbies);
             showToast("个人资料更新成功！", "success");
         }
 
