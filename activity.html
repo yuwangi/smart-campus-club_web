@@ -42,7 +42,7 @@
 </head>
 <body>
 
-    <!-- Transparent Navbar for Immersive Effect -->
+    <!-- 透明导航栏，沉浸式效果 -->
     <nav class="navbar navbar-expand-lg fixed-top" style="background: transparent !important; border:none; box-shadow:none;">
         <div class="container">
             <a class="navbar-brand text-white" href="index.html">
@@ -58,18 +58,18 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- 主内容区 -->
     <div class="container py-5" style="margin-top: 60px;">
-        <!-- Top Section: Poster & Info -->
+        <!-- 顶部区域：海报和信息 -->
         <div class="row g-5 mb-5">
-            <!-- Left: Poster -->
+            <!-- 左侧：海报 -->
             <div class="col-md-5">
                 <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-                    <img src="images/activity_music.png" class="img-fluid w-100" alt="Activity Poster" style="object-fit: cover; height: 100%;">
+                    <img src="images/activity_music.png" class="img-fluid w-100" alt="活动海报" style="object-fit: cover; height: 100%;">
                 </div>
             </div>
             
-            <!-- Right: Info -->
+            <!-- 右侧：信息 -->
             <div class="col-md-7">
                 <div class="h-100 d-flex flex-column justify-content-center">
                     <span class="badge bg-primary-gradient w-auto align-self-start mb-2 px-3 py-1 rounded-pill">🔥 热门活动</span>
@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <!-- Bottom Section: Details -->
+        <!-- 底部区域：详情 -->
         <div class="row">
             <div class="col-12">
                 <div class="card border-0 shadow-sm rounded-4">
@@ -135,7 +135,7 @@
         </div>
     </div>
 
-    <!-- Toast Container -->
+    <!-- 消息提示容器 -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -143,16 +143,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            const id = params.get('id') || 'music'; // Default to music if no ID
+            const id = params.get('id') || 'music'; // 如果没有ID，默认使用music
             const data = activities[id];
 
             if (data) {
-                // Update Badge/Tag if you want (optional, keeping "Popular" for now)
-                // document.getElementById('activityTag').innerText = data.tag; 
+                // 如需更新徽章/标签可在此处理（可选，目前保持"热门活动"）
+                 
                 
                 
                 document.getElementById('activityTitle').innerText = data.title;
-                document.querySelector('img[alt="Activity Poster"]').src = data.poster;
+                document.querySelector('img[alt="活动海报"]').src = data.poster;
                 
                 // Info Section
                 const infoContainer = document.getElementById('activityInfo');
@@ -211,7 +211,7 @@
                 navAuthSection.innerHTML = `
                     <div class="dropdown">
                         <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-white fw-bold" href="#" data-bs-toggle="dropdown">
-                            <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
+                            <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="头像">
                             <span>${username}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 mt-2">
@@ -246,7 +246,7 @@
                     showToast("复制失败，请手动复制链接", "error");
                 });
             } else {
-                // Fallback for non-HTTPS / older browsers
+                // 针对非HTTPS/旧版浏览器的降级方案
                 const textarea = document.createElement('textarea');
                 textarea.value = url;
                 textarea.style.position = 'fixed';
