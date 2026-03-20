@@ -110,12 +110,19 @@
 
         function handleLogin(event) {
             event.preventDefault();
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', document.getElementById('username').value || 'Student');
-            showToast('登录成功！正在跳转...', 'success');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === '123456') {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                showToast('登录成功！正在跳转...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                showToast('用户名或密码错误，请重试', 'error');
+            }
         }
     </script>
 </body>

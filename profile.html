@@ -63,7 +63,7 @@
                                 <input type="file" id="avatarFile" class="d-none" accept="image/*" onchange="previewAvatar(this)">
                             </div>
                             <div>
-                                <h4 class="fw-bold mb-1">张三</h4>
+                                <h4 class="fw-bold mb-1" id="profileUsername">张三</h4>
                                 <p class="text-muted mb-0">更新您的头像和个人信息</p>
                             </div>
                         </div>
@@ -176,6 +176,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const username = localStorage.getItem('username') || 'Student';
             document.getElementById('navUsernameDisplay').innerText = username;
+            document.getElementById('profileUsername').innerText = username;
             if (document.getElementById('username') && document.getElementById('username').tagName === 'INPUT') {
                 document.getElementById('username').value = username;
             }
