@@ -399,3 +399,17 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+/* Avatar overlap with responsive design */
+.avatar-overlap {
+    width: 30px;
+    height: 30px;
+    margin-right: -10px;
+}
+
+/* Adjust overlap for smaller screens */
+@media (max-width: 400px) {
+    .avatar-overlap {
+        margin-right: -5px;
+    }
+}
