@@ -111,7 +111,7 @@
         function handleLogin(event) {
             event.preventDefault();
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', document.getElementById('username').value || 'Student');
+            localStorage.setItem('username', document.getElementById('username').value || '访客');
             showToast('登录成功！正在跳转...', 'success');
             setTimeout(() => {
                 window.location.href = 'index.html';
