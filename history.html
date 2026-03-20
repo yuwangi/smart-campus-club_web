@@ -17,8 +17,8 @@
             </a>
             <div class="dropdown" id="navAuthSection">
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" href="#" data-bs-toggle="dropdown">
-                    <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
-                    <span id="navUsernameDisplay">Student</span>
+                    <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="头像">
+                    <span id="navUsernameDisplay">访客</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 mt-2">
                     <li><a class="dropdown-item py-2" href="profile.html"><i class="bi bi-person me-2 text-muted"></i>个人中心</a></li>
@@ -33,7 +33,7 @@
         <div class="dashboard-container">
             <!-- Sidebar -->
             <aside class="modern-sidebar d-none d-lg-block">
-                <h6 class="text-uppercase text-muted fw-bold small px-3 mb-3">Menu</h6>
+                <h6 class="text-uppercase text-muted fw-bold small px-3 mb-3">菜单</h6>
                 <div class="nav flex-column nav-pills-modern">
                     <a class="nav-link" href="profile.html"><i class="bi bi-person me-3 fs-5"></i>个人资料</a>
                     <a class="nav-link" href="publish.html"><i class="bi bi-pencil-square me-3 fs-5"></i>发布活动</a>
@@ -69,7 +69,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const username = localStorage.getItem('username') || 'Student';
+            const username = localStorage.getItem('username') || '访客';
             const display = document.getElementById('navUsernameDisplay');
             if (display) display.innerText = username;
         });

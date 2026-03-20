@@ -17,8 +17,8 @@
             </a>
             <div class="dropdown" id="navAuthSection">
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" href="#" data-bs-toggle="dropdown">
-                    <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
-                    <span id="navUsernameDisplay">Student</span>
+                    <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="头像">
+                    <span id="navUsernameDisplay">访客</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 mt-2">
                     <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2 text-muted"></i>设置</a></li>
@@ -33,7 +33,7 @@
         <div class="dashboard-container">
             <!-- Modern Sidebar -->
             <aside class="modern-sidebar d-none d-lg-block">
-                <h6 class="text-uppercase text-muted fw-bold small px-3 mb-3">Menu</h6>
+                <h6 class="text-uppercase text-muted fw-bold small px-3 mb-3">菜单</h6>
                 <div class="nav flex-column nav-pills-modern">
                     <a class="nav-link active" href="profile.html"><i class="bi bi-person me-3 fs-5"></i>个人资料</a>
                     <a class="nav-link" href="publish.html"><i class="bi bi-pencil-square me-3 fs-5"></i>发布活动</a>
@@ -53,10 +53,10 @@
                 
                 <div class="content-card">
                     <form onsubmit="handleSave(event)">
-                        <!-- Avatar Section -->
+                        <!-- 头像 Section -->
                         <div class="d-flex align-items-center gap-4 mb-5">
                             <div class="position-relative">
-                                <img src="https://placehold.co/150x150" id="avatarPreview" class="rounded-circle shadow" width="100" height="100" style="object-fit: cover;" alt="Avatar">
+                                <img src="https://placehold.co/150x150" id="avatarPreview" class="rounded-circle shadow" width="100" height="100" style="object-fit: cover;" alt="头像">
                                 <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 border-2 border-white" onclick="document.getElementById('avatarFile').click()">
                                     <i class="bi bi-camera"></i>
                                 </button>
@@ -128,13 +128,13 @@
                              <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control border-0 rounded-3" id="password" placeholder="New Password">
+                                        <input type="password" class="form-control border-0 rounded-3" id="password" placeholder="新密码">
                                         <label for="password">新密码 (如不修改请留空)</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control border-0 rounded-3" id="confirmPassword" placeholder="Confirm Password">
+                                        <input type="password" class="form-control border-0 rounded-3" id="confirmPassword" placeholder="确认密码">
                                         <label for="confirmPassword">确认新密码</label>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
      <!-- Offcanvas for Mobile Sidebar -->
     <div class="offcanvas offcanvas-start rounded-end-4" tabindex="-1" id="sidebarOffcanvas">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title fw-bold">Menu</h5>
+            <h5 class="offcanvas-title fw-bold">菜单</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
@@ -174,7 +174,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const username = localStorage.getItem('username') || 'Student';
+            const username = localStorage.getItem('username') || '访客';
             document.getElementById('navUsernameDisplay').innerText = username;
             if (document.getElementById('username') && document.getElementById('username').tagName === 'INPUT') {
                 document.getElementById('username').value = username;
@@ -213,7 +213,34 @@
 
         function handleSave(event) {
             event.preventDefault();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // 验证密码一致性
+            if (password || confirmPassword) {
+                if (password !== confirmPassword) {
+                    showToast('两次输入的密码不一致，请重新输入', 'error');
+                    return;
+                }
+                if (password.length < 6) {
+                    showToast('密码长度至少需要6位字符', 'error');
+                    return;
+                }
+            }
+            
+            // 验证手机号码格式
+            const phone = document.getElementById('phone').value;
+            if (phone && !validatePhone(phone)) {
+                showToast('请输入有效的手机号码格式（11位数字）', 'error');
+                return;
+            }
+            
             showToast("个人资料更新成功！", "success");
+        }
+        
+        function validatePhone(phone) {
+            const phoneRegex = /^1[3-9]\d{9}$/;
+            return phoneRegex.test(phone);
         }
 
         function previewAvatar(input) {
