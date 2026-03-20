@@ -2,7 +2,92 @@
  * Smart Club - Shared JS
  */
 
-// Toast Notification System
+window.handleLogout = function(e) {
+    e.preventDefault();
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
+    window.location.href = 'login.html';
+};
+
+window.checkAuth = function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        window.location.href = 'login.html';
+        return false;
+    }
+    return true;
+};
+
+window.renderNavbar = function(options = {}) {
+    const { isTransparent = false, activePage = '' } = options;
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const username = localStorage.getItem('username') || 'Student';
+    const navAuthSection = document.getElementById('navAuthSection');
+    
+    if (!navAuthSection) return;
+
+    const navLinkClass = isTransparent ? 'text-white' : 'text-dark';
+    const dropdownToggleClass = isTransparent ? 'text-white' : 'text-dark';
+
+    if (isLoggedIn) {
+        const navLinks = `
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="index.html">
+                    <i class="bi bi-house me-1"></i>首页
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="recommend.html">
+                    <i class="bi bi-stars me-1"></i>活动推荐
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="publish.html">
+                    <i class="bi bi-pencil-square me-1"></i>发布活动
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="history.html">
+                    <i class="bi bi-clock-history me-1"></i>历史记录
+                </a>
+            </li>
+        `;
+
+        navAuthSection.innerHTML = `
+            ${navLinks}
+            <li class="nav-item ms-2">
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle ${dropdownToggleClass} fw-bold" href="#" data-bs-toggle="dropdown">
+                        <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
+                        <span>${username}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 mt-2">
+                        <li><a class="dropdown-item py-2" href="profile.html"><i class="bi bi-person me-2 text-muted"></i>个人中心</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger" href="#" onclick="handleLogout(event)"><i class="bi bi-box-arrow-right me-2"></i>退出登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        `;
+    } else {
+        navAuthSection.innerHTML = `
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="index.html">
+                    <i class="bi bi-house me-1"></i>首页
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ${navLinkClass}" href="recommend.html">
+                    <i class="bi bi-stars me-1"></i>活动推荐
+                </a>
+            </li>
+            <li class="nav-item ms-2">
+                <a class="btn btn-primary-gradient rounded-pill" href="login.html">登录 / 注册</a>
+            </li>
+        `;
+    }
+};
+
 window.showToast = function(message, type = 'success') {
     let container = document.getElementById('toastContainer');
     
