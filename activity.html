@@ -42,13 +42,27 @@
 </head>
 <body>
 
-    <!-- Transparent Navbar for Immersive Effect -->
-    <nav class="navbar navbar-expand-lg fixed-top" style="background: transparent !important; border:none; box-shadow:none;">
+    <!-- Premium Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand text-white" href="index.html">
-                <i class="bi bi-box-seam-fill me-2"></i>智能社团活动管理系统
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-box-seam-fill me-2 text-gradient"></i>智能社团活动管理系统
             </a>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="index.html"><i class="bi bi-house-door me-1"></i>首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="recommend.html"><i class="bi bi-stars me-1"></i>活动推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="publish.html"><i class="bi bi-pencil-square me-1"></i>发布活动</a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav align-items-center gap-3" id="navAuthSection">
                     <li class="nav-item">
                         <a class="btn btn-primary-gradient rounded-pill" href="login.html">登录 / 注册</a>
@@ -210,7 +224,7 @@
             if (isLoggedIn && navAuthSection) {
                 navAuthSection.innerHTML = `
                     <div class="dropdown">
-                        <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-white fw-bold" href="#" data-bs-toggle="dropdown">
+                        <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" href="#" data-bs-toggle="dropdown">
                             <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
                             <span>${username}</span>
                         </a>
