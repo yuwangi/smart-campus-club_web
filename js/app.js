@@ -44,6 +44,105 @@ window.showToast = function(message, type = 'success') {
     }, 3000);
 };
 
+// Auth Functions
+window.checkAuth = function() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+};
+
+window.getCurrentUser = function() {
+    return {
+        isLoggedIn: checkAuth(),
+        username: localStorage.getItem('username') || 'Student'
+    };
+};
+
+window.handleLogout = function(e) {
+    e.preventDefault();
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
+    window.location.href = 'login.html';
+};
+
+// Navbar Rendering
+window.renderNavbar = function(showNavLinks = true) {
+    const user = getCurrentUser();
+    const navAuthSection = document.getElementById('navAuthSection');
+    
+    if (!navAuthSection) return;
+
+    if (user.isLoggedIn) {
+        navAuthSection.innerHTML = `
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                ${showNavLinks ? `
+                <ul class="navbar-nav align-items-center gap-1 me-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house me-1"></i>首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommend.html"><i class="bi bi-stars me-1"></i>活动推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="publish.html"><i class="bi bi-plus-circle me-1"></i>发布活动</a>
+                    </li>
+                </ul>
+                ` : ''}
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark fw-bold" href="#" data-bs-toggle="dropdown">
+                        <img src="https://placehold.co/100x100" class="rounded-circle border border-2 border-primary me-2" width="36" height="36" alt="Avatar">
+                        <span>${user.username}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 mt-2">
+                        <li><a class="dropdown-item py-2" href="profile.html"><i class="bi bi-person me-2 text-muted"></i>个人中心</a></li>
+                        <li><a class="dropdown-item py-2" href="history.html"><i class="bi bi-clock-history me-2 text-muted"></i>历史记录</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger" href="#" onclick="handleLogout(event)"><i class="bi bi-box-arrow-right me-2"></i>退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        `;
+    } else {
+        navAuthSection.innerHTML = `
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-1">
+                    ${showNavLinks ? `
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house me-1"></i>首页</a>
+                    </li>
+                    ` : ''}
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary-gradient rounded-pill" href="login.html">登录 / 注册</a>
+                    </li>
+                </ul>
+            </div>
+        `;
+    }
+};
+
+// Auth Guard for protected pages
+window.requireAuth = function() {
+    if (!checkAuth()) {
+        showToast('请先登录后再访问该页面', 'warning');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1000);
+        return false;
+    }
+    return true;
+};
+
+// Update username display
+window.updateUsernameDisplay = function() {
+    const user = getCurrentUser();
+    const displays = document.querySelectorAll('#navUsernameDisplay, #username');
+    displays.forEach(el => {
+        if (el.tagName === 'INPUT') {
+            el.value = user.username;
+        } else {
+            el.innerText = user.username;
+        }
+    });
+};
+
 // Mock Activity Data
 const activities = {
     "music": {
@@ -94,7 +193,5 @@ const activities = {
 
 // Common Init
 document.addEventListener('DOMContentLoaded', () => {
-    // Add toast container styles dynamically if needed, 
-    // but they are already in style.css which is preferred.
     console.log('Smart Club JS Loaded');
 });
