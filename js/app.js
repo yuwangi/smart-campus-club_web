@@ -1,12 +1,12 @@
 /**
- * Smart Club - Shared JS
+ * 智能社团活动管理系统 - 公共JS
  */
 
-// Toast Notification System
+// 提示通知系统
 window.showToast = function(message, type = 'success') {
     let container = document.getElementById('toastContainer');
     
-    // Create container if not exists
+    // 如果容器不存在则创建
     if (!container) {
         container = document.createElement('div');
         container.id = 'toastContainer';
@@ -17,7 +17,7 @@ window.showToast = function(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `custom-toast toast-${type}`;
     
-    // Icon selection
+    // 图标选择
     let iconClass = 'bi-info-circle-fill';
     if (type === 'success') iconClass = 'bi-check-circle-fill';
     else if (type === 'error') iconClass = 'bi-x-circle-fill';
@@ -30,13 +30,13 @@ window.showToast = function(message, type = 'success') {
     
     container.appendChild(toast);
     
-    // Animation
+    // 动画效果
     setTimeout(() => {
         toast.style.opacity = '1';
         toast.style.transform = 'translateX(0)';
     }, 10);
 
-    // Auto remove
+    // 自动移除
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateX(100%)';
@@ -44,7 +44,7 @@ window.showToast = function(message, type = 'success') {
     }, 3000);
 };
 
-// Mock Activity Data
+// 模拟活动数据
 const activities = {
     "music": {
         title: "校园十佳歌手大赛",
@@ -92,9 +92,9 @@ const activities = {
     }
 };
 
-// Common Init
+// 公共初始化
 document.addEventListener('DOMContentLoaded', () => {
-    // Add toast container styles dynamically if needed, 
-    // but they are already in style.css which is preferred.
-    console.log('Smart Club JS Loaded');
+    // 动态添加提示容器样式（如需要），
+    // 但样式已在 style.css 中定义，推荐使用该方式。
+    console.log('智能社团活动管理系统 JS 已加载');
 });
