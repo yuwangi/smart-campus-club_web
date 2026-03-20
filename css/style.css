@@ -369,6 +369,33 @@ body {
     to { transform: translateX(0); opacity: 1; }
 }
 
+/* Avatar Stack - Responsive overlapping avatars */
+.avatar-group {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-stack {
+    width: 30px;
+    height: 30px;
+    margin-right: -8px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.avatar-stack:last-of-type {
+    margin-right: 0;
+}
+
+@media (max-width: 576px) {
+    .avatar-stack {
+        width: 24px;
+        height: 24px;
+        margin-right: -6px;
+    }
+}
+
 /* Utilities */
 .text-gradient {
     background: var(--primary-gradient);
