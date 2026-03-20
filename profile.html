@@ -213,6 +213,11 @@
 
         function handleSave(event) {
             event.preventDefault();
+            // 保存兴趣爱好到 localStorage
+            const hobbiesInput = document.getElementById('hobbies');
+            if (hobbiesInput) {
+                localStorage.setItem('hobbies', hobbiesInput.value);
+            }
             showToast("个人资料更新成功！", "success");
         }
 
